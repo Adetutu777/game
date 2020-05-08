@@ -56,7 +56,7 @@ let click = {
         output.push(`
         <div class='output-res' style='text-align:center; margin-bottom:2rem; font-size:2rem;font-family:Monaco;'> 
         <h2> End of Quiz....</h2>
-         Your Total score is ${score} out of ${this.questions.length * 20}
+         Your Total Score is ${score} out of ${this.questions.length * 20}
         </div>`);
         output.join('');
         quizBox.style.display = 'none';
