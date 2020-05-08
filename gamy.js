@@ -4,6 +4,8 @@ let idul = document.getElementById('idul');
   (quizBox = document.getElementById('questionAll')),
   (answerSection = document.querySelector('.choice')),
   (reloadBtn = document.querySelector('#reload')),
+  (qUpdateSec = document.querySelector('.spany')),
+  (scoreupdateSec = document.querySelector('.scorescore')),
   (ch1 = document.getElementById('ch1')),
   (ch2 = document.getElementById('ch2')),
   (ch3 = document.getElementById('ch3')),
@@ -11,9 +13,8 @@ let idul = document.getElementById('idul');
   (questionUpdate = document.querySelector('.answered'));
 score = 0;
 numscore = 1;
-let reloadFunc = () => {
-  location.reload();
-};
+let reloadFunc = () => location.reload();
+
 let click = {
   questions: [
     {
@@ -50,15 +51,20 @@ let click = {
   index: 0,
   load: function () {
     if (this.index <= this.questions.length + 1) {
-      // if (numscore == 5) {
-      //   butty.innerText = 'Get Results';
-      // }
-      let finishQuiz = [];
       if (this.questions[this.index] === undefined) {
-        quizBox.innerHTML = 'quiz over!!';
+        let output = [];
+        output.push(`
+        <div class='output-res' style='text-align:center; margin-bottom:2rem; font-size:2rem;font-family:Monaco;'> 
+        <h2> End of Quiz....</h2>
+         Your Total score is ${score} out of ${this.questions.length * 20}
+        </div>`);
+        output.join('');
+        quizBox.style.display = 'none';
+        qUpdateSec.style.display = 'none';
+        scoreupdateSec.style.display = 'none';
         butty.style.display = 'none';
         reloadBtn.style.display = 'block';
-        answerSection.innerHTML = 'Your total score is' + score + 'out of 100';
+        answerSection.innerHTML = output;
       }
       quizBox.innerHTML = this.questions[this.index].q;
       ch1.innerHTML = this.questions[this.index].options[0];
@@ -66,10 +72,6 @@ let click = {
       ch3.innerHTML = this.questions[this.index].options[2];
       ch4.innerHTML = this.questions[this.index].options[3];
     } else {
-      // if (numscore + 1 >= 5) {
-      //   quizBox.innerHTML = 'quiz over!!';
-      // }
-      // quizBox.innerHTML = 'quiz over!!';
       ch1.style.display = none;
       ch2.style.display = none;
       ch3.style.display = none;
@@ -110,19 +112,16 @@ let click = {
     let status = this.questions[this.index].options.indexOf(newValue);
 
     if (status == this.questions[this.index].answers) {
-      score += 10;
+      score += 20;
       ele.className = 'correct';
-      // ele.innerHTML = score;
-      myArray = [];
     } else {
       ele.className = 'wrong';
-      //   ele.innerHTML = 'wrong';
-      myArray = [];
     }
 
     if (numscore == 5) {
       butty.innerText = 'Get Results';
     }
+
     const scoreTrack = document.querySelector('#scoreBoard');
     scoreTrack.innerHTML = score;
   },
