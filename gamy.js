@@ -120,6 +120,8 @@ let click = {
 
     if (numscore == 5) {
       butty.innerText = 'Get Results';
+      butty.style.padding = '1rem 0.4rem 1rem 0rem';
+      butty.style.margin = '-0.9rem 1rem';
     }
 
     const scoreTrack = document.querySelector('#scoreBoard');
